@@ -9,24 +9,29 @@
     <style>
         body{
             margin: 10% 4% 4% 4%;
+            background-color: rgb(7, 45, 88);
         }
         .userContainer{
             display: flex;
-            height: 25em;
+            height: 25em;   
+            border: greenyellow;         
             align-items: center;
-            justify-content: center;
+            justify-content: center;            
         }
         .invoiceContainer{
             margin-top: 4em;
+            margin-bottom: 20%;
+            border-color: rgb(231, 231, 115);
             display: flex;
             flex-wrap: wrap;
             width:100%;
             height: auto;
+            background-color: rgb(172, 165, 165);
         }
         .userProfile{
             border: 1px solid black;
             display: flex;
-            width: 60%;
+            width: 100%;
             height: 100%;
         }
         .user{
@@ -35,16 +40,18 @@
         #picContainer{
             width: 40%;
             margin: 8% 0% 8% 3%;
-            background-color: #4D6076;
+            background-color: rgb(48, 115, 192);
         }
         #infoContainer{
             margin: 5% 2% 2% 2%;
             width: 60%;
             font-family: Nobile;
 	        font-size: 16px;
+            background-color: rgb(180, 177, 177);
         }
         p{
             font-size: 22px;
+            color: white;
         }
         img{
             position: relative;
@@ -52,11 +59,13 @@
             height: 100%;
         }
         .invoice{
-            border: 1px solid black;
+            border: 3px solid rgb(231, 231, 115);
             margin: 6% 3% 0% 3%;
             padding: 2%;
             width: 250px;
             height: auto;
+            background-color: rgb(92, 181, 233);
+            
             
         }
         .invoice > p{
@@ -68,15 +77,36 @@
     </style>
 </head>
 <body>
-     
+     <div class="userContainer">
+         <div class="userProfile">
+             <div class="user" id="picContainer">
+                 <img src="" alt="Should be a logo">
+             </div>
+             <div class="user" id="infoContainer">
+                 Name:
+                 <p class="name"></p>
+                 Company Name:
+                 <p class="companyName"></p>
+                 Address:
+                 <p class="address"></p>
+                 Email:
+                 <p class="email"></p>                                
+             </div>
+         </div>
+     </div>
+     <p>Invoices</p>
+     <div class="invoiceContainer">
+
+     </div>
+
     <script>
         //Fake it til you make it Database
         var user = {
-            name: ,
-            companyName: ,
-            address: ,
-            email: ,
-            picture: 
+            name: "Patricia",
+            companyName: "General MRO",
+            address: "10990 NW 92ND TER, MIAMI FL,",
+            email: "pcolaiacovo@generalmroaerospace.com",
+            picture: "gma.png"
         }
 
         var invoices = [
@@ -106,38 +136,74 @@
                 amount: 160,
                 cost: 414.00,
                 paid: 414.00
+            },
+            {
+                inv_id: "1234567",
+                companyName: user.companyName,
+                date: "6/14/2016",
+                order: "Engines",
+                amount: 160,
+                cost: 2500.00,
+                paid: 2500.00
+            },
+            {
+                inv_id: "2345678",
+                companyName: user.companyName,
+                date: "6/14/2016",
+                order: "Ansett",
+                amount: 160,
+                cost: 2584.00,
+                paid: 3600.00
+            },
+            {
+                inv_id: "3456789",
+                companyName: user.companyName,
+                date: "6/14/2016",
+                order: "American Airlines",
+                amount: 985,
+                cost: 19587.58,
+                paid: 20000.00
             }
+
+
+
+
         
         ]
 
         
         //element selectors
+                document.querySelector(".name").textContent = user.name
+                document.querySelector(".companyName").textContent = user.companyName
+                document.querySelector(".address").textContent = user.address
+                document.querySelector(".email").textContent = user.email
+                document.querySelector("img").src = user.picture
 
         //adding invoices
         for(var i=0; i<invoices.length; i++){
             document.querySelector('.invoiceContainer').innerHTML += `
             <div class="invoice" id=${invoices[i].inv_id}>
                 Invoice #:   <br/>    
-                <p>${} </p>
+                <p>${invoices[i].inv_id} </p>
                 Company Name:   <br /> 
-                <p>${} </p>
+                <p>${invoices[i].companyName} </p>
                 Date:  <br />
-                <p> ${} </p>
+                <p> ${invoices[i].date} </p>
                 Order:  <br />   
-                <p>${} </p>
+                <p>${invoices[i].order} </p>
                 Amount:   <br />     
-                <p>${} </p>
+                <p>${invoices[i].amount} </p>
                 Cost:       <br />    
-                <p>$${} </p>
+                <p>${invoices[i].cost} </p>
                 Paid:       <br />   
-                <p> $${} </p>
+                <p> ${invoices[i].paid} </p>
                 Owed:        <br />   
-                <p>$${} </p>
+                <p>${invoices[i].cost - invoices[i].paid} </p>
             </div>
             `
         }
 
 
-    </script>
+    </script> 
 </body>
 </html>
